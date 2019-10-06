@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.VideoView;
@@ -15,13 +16,12 @@ public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_VIDEO_CAPTURE = 1;
 
-    private VideoView videoView;
+    private Uri videoUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        videoView = findViewById(R.id.videoView);
 
     }
 
@@ -34,14 +34,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+    public void goto2(View view){
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this,Main2Activity.class);
+        intent.putExtra("videoUri",videoUri);
+        startActivity(intent);
+
+
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 
         if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            Uri videoUri = data.getData();
-            videoView.setVideoURI(videoUri);
+            videoUri = data.getData();
+
+
         }
 
     }
