@@ -39,10 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void gotoVedio(View view){
 
-        Intent takeVideoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-        if (takeVideoIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takeVideoIntent, REQUEST_VIDEO_CAPTURE);
-        }
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this,Main2Activity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -54,10 +53,6 @@ public class MainActivity extends AppCompatActivity {
             imageView.setImageBitmap(imageBitmap);
         }
 
-        if (requestCode == REQUEST_VIDEO_CAPTURE && resultCode == RESULT_OK) {
-            Uri videoUri = data.getData();
-            videoView.setVideoURI(videoUri);
-        }
 
     }
 
